@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Heroes Transitional Living & Workforce Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2f4d 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(10, 22, 40, 0.8), rgba(10, 22, 40, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%230a1628" width="1200" height="800"/></svg>');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(rgba(10, 22, 40, 0.7), rgba(10, 22, 40, 0.85));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #d4af37;
+            border: 2px dashed #d4af37;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .gold-accent {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin-bottom: 2rem;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .mission-statement {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: rgba(26, 47, 77, 0.6);
+            border-left: 4px solid #d4af37;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '▼';
+            font-size: 2rem;
+            color: #d4af37;
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #d4af37;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #d4af37;
+            margin: 2rem 0 1rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: rgba(26, 47, 77, 0.7);
+            padding: 0;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            border-color: #d4af37;
+        }
+
+        .card h4 {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card h4,
+        .card p,
+        .card ul {
+            padding: 0 2rem;
+        }
+
+        .card h4 {
+            padding-top: 1.5rem;
+        }
+
+        .card > p:last-child,
+        .card > ul:last-child {
+            padding-bottom: 2rem;
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0 2rem 2rem 2rem !important;
+        }
+
+        .features-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .features-list li::before {
+            content: '★';
+            color: #d4af37;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .value-proposition {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(26, 47, 77, 0.3) 100%);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-top: 3px solid #d4af37;
+            border-bottom: 3px solid #d4af37;
+            text-align: center;
+        }
+
+        .value-proposition h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .value-formula {
+            font-size: 2rem;
+            color: #d4af37;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 2rem 0;
+        }
+
+        .impact-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: #d4af37;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pathway-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .pathway-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(26, 47, 77, 0.5);
+            margin: 0.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .pathway-step::after {
+            content: '→';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .pathway-step:last-child::after {
+            content: '';
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(10, 22, 40, 0.8) 100%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: #d4af37;
+            color: #0a1628;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .pathway-step::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -2rem;
+                transform: translateX(50%);
+            }
+            form > div > div:nth-child(2) {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <img src="FullViewSmall.jpeg" alt="Mission Rebuild" style="width: 100%; height: auto; display: block;">
+
+        <div class="hero-content">
+            <h1>Community <span class="gold-accent">Heroes</span></h1>
+            <p class="subtitle">Transitional Living & Workforce Development</p>
+            <div class="mission-statement">
+                A hospitality-centered community where military heroes and community members move from housing instability toward long-term self-sufficiency, economic independence, and permanent housing through dignity, opportunity, and ownership.
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </div>
+
+    <section id="waitlist" style="background: rgba(26, 47, 77, 0.4); padding: 4rem 2rem; margin: 0;">
+        <h2>Join Our Waitlist</h2>
+        <p style="text-align: center; font-size: 1.2rem; max-width: 700px; margin: 0 auto 3rem;">
+            Take the first step toward independence. Complete this brief questionnaire to be added to our priority waitlist.
+        </p>
+        
+        <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: center;">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4U_pK3VLr4FIWsSg2CHpD5npjXhpU1OZ7ziL0QoD-R7L1fA/viewform?embedded=true" width="100%" height="1535" frameborder="0" marginheight="0" marginwidth="0" style="border: 2px solid #d4af37; border-radius: 8px; background: #fff;">Loading…</iframe>
+        </div>
+    </section>
+
+    <section>
+        <h2>Our Vision</h2>
+        <p style="text-align: center; font-size: 1.3rem; max-width: 800px; margin: 2rem auto;">
+            This is not a shelter. This is a <span class="gold-accent">pathway to independence</span>. 
+            We provide hotel-level accommodations, professional hospitality operations, and workforce development 
+            opportunities that prioritize dignity, personal agency, and economic mobility.
+        </p>
+    </section>
+
+    <section>
+        <h2>Facility Overview</h2>
+        <div class="card-grid">
+            <div class="card">
+                <img src="lobbySmall.jpeg" alt="Hospitality-Grade Lobby">
+                <h4>Hospitality-Grade Lobby</h4>
+                <p>Professional front desk operations with hotel-standard service and guest experience training opportunities.</p>
+            </div>
+            <div class="card">
+                <img src="OneBRoom.jpeg" alt="Private Accommodations">
+                <h4>Private Accommodations</h4>
+                <p>Hotel-style private and semi-private rooms designed to restore dignity and personal space for every resident.</p>
+            </div>
+            <div class="card">
+                <img src="EatsSmall.jpeg" alt="Community Dining">
+                <h4>Community Dining</h4>
+                <p>Shared dining spaces featuring chef-prepared meals and food service training programs.</p>
+            </div>
+            <div class="card">
+                <img src="KitchenSmall.jpeg" alt="Commercial Kitchen">
+                <h4>Commercial Kitchen</h4>
+                <p>State-of-the-art culinary facilities for training, catering operations, and entrepreneurship development.</p>
+            </div>
+            <div class="card">
+                <img src="FitnessSmall.jpeg" alt="Fitness & Wellness">
+                <h4>Fitness & Wellness</h4>
+                <p>On-site fitness center supporting physical health and wellness as part of holistic resident development.</p>
+            </div>
+            <div class="card">
+                <img src="TrainingSmall.jpeg" alt="Training Centers">
+                <h4>Training Centers</h4>
+                <p>Dedicated spaces for vocational training, case management, and individualized growth planning.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Who We Serve</h2>
+        <div class="card">
+            <ul class="features-list">
+                <li>Military Heroes transitioning from homelessness or unstable housing</li>
+                <li>Veterans reentering civilian life requiring residential stability</li>
+                <li>Individuals seeking structured, service-enriched environments promoting independence</li>
+                <li>Community members pursuing workforce reentry and vocational training</li>
+                <li>Aspiring entrepreneurs seeking pathways to business ownership</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Comprehensive Services</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h4>Residential Support</h4>
+                <ul class="features-list">
+                    <li>24-hour professional supervision</li>
+                    <li>Case management and individualized plans</li>
+                    <li>Life skills and financial literacy training</li>
+                    <li>Transportation access</li>
+                    <li>VA and community resource coordination</li>
+                    <li>Daily nutritious meals</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Workforce Development</h4>
+                <ul class="features-list">
+                    <li>Front desk and guest services training</li>
+                    <li>Housekeeping and facilities management</li>
+                    <li>Night audit operations</li>
+                    <li>Culinary and food service programs</li>
+                    <li>Hospitality management certifications</li>
+                    <li>Customer service excellence</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Entrepreneurship Pathways</h4>
+                <ul class="features-list">
+                    <li>Food service micro-enterprise development</li>
+                    <li>Catering and pop-up concepts</li>
+                    <li>Hospitality brand incubation</li>
+                    <li>Cooperative ownership models</li>
+                    <li>Transition from employee to owner</li>
+                    <li>Business planning and finance</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>The Journey to Independence</h2>
+        <div class="pathway-flow">
+            <div class="pathway-step">
+                <h4 style="color: #d4af37;">Entry</h4>
+                <p>Assessment & Placement</p>
+            </div>
+            <div class="pathway-step">
+                <h4 style="color: #d4af37;">Stabilization</h4>
+                <p>Housing & Support</p>
+            </div>
+            <div class="pathway-step">
+                <h4 style="color: #d4af37;">Training</h4>
+                <p>Skills & Certification</p>
+            </div>
+            <div class="pathway-step">
+                <h4 style="color: #d4af37;">Employment</h4>
+                <p>Income Generation</p>
+            </div>
+            <div class="pathway-step">
+                <h4 style="color: #d4af37;">Independence</h4>
+                <p>Permanent Housing</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="value-proposition">
+        <h2>Our Model</h2>
+        <div class="value-formula">
+            Hospitality + Housing + Workforce + Ownership
+        </div>
+        <p style="font-size: 1.3rem; max-width: 900px; margin: 2rem auto;">
+            By integrating hotel-level accommodations, on-the-job training, vocational pathways, and entrepreneurship, 
+            we create a clear, dignified pathway from instability to independence—not just housing, but 
+            <span class="gold-accent">economic self-sufficiency</span>.
+        </p>
+    </div>
+
+    <section>
+        <h2>Community Impact</h2>
+        <div class="card">
+            <ul class="features-list">
+                <li>Restore dignity and stability for Community Heroes</li>
+                <li>Reduce long-term homelessness through employment-driven solutions</li>
+                <li>Strengthen local workforce and small business ecosystem</li>
+                <li>Operate with professionalism and minimal neighborhood impact</li>
+                <li>Maintain full compliance with municipal regulations</li>
+                <li>Coordinate proactively with city departments and community partners</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Program Philosophy</h2>
+        <div style="background: rgba(26, 47, 77, 0.6); padding: 3rem; border-left: 5px solid #d4af37; margin: 2rem 0;">
+            <p style="font-size: 1.4rem; line-height: 1.8; text-align: center;">
+                Residents are not treated as <span class="gold-accent">recipients of services</span>, 
+                but as <span class="gold-accent">participants, apprentices, operators, and future owners</span> 
+                within a functioning hospitality environment. We believe stable housing, meaningful work, 
+                and ownership pathways are inseparable.
+            </p>
+        </div>
+    </section>
+
+    <div class="cta-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">We're Here to Help</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Have questions? Need more information? Want to share feedback or explore partnership opportunities? 
+            We welcome your call and look forward to connecting with you.
+        </p>
+        
+        <div style="max-width: 600px; margin: 0 auto 3rem; background: rgba(10, 22, 40, 0.6); padding: 2.5rem; border-radius: 8px; border: 2px solid #d4af37;">
+            <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">Contact Mission Rebuild</h3>
+            
+            <div style="text-align: center; padding: 1.5rem; background: rgba(26, 47, 77, 0.5); border-radius: 4px; margin-bottom: 2rem;">
+                <p style="color: #fff; font-size: 1.1rem; line-height: 1.8;">
+                    <strong style="color: #d4af37;">Mission Rebuild - Housing</strong><br>
+                    7910 Mall Ring Rd, Suite 100<br>
+                    Stonecrest, GA 30038<br><br>
+                    <strong style="color: #d4af37;">Phone:</strong> (404) 487-8640<br>
+                    <strong style="color: #d4af37;">Email:</strong> Housing@newmission-rebuild.com<br>
+                    <strong style="color: #d4af37;">Web:</strong> www.newmission-rebuild.com
+                </p>
+            </div>
+            
+            <p style="font-size: 1.1rem; color: #d4af37; margin-bottom: 1.5rem; font-weight: bold; text-align: center;">
+                Office Hours: Monday - Friday, 9:00 AM - 5:00 PM EST
+            </p>
+        </div>
+        
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; max-width: 800px; margin: 0 auto;">
+            <button id="downloadVCF" class="cta-button" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none;">
+                <span style="font-size: 1.5rem;">💾</span> Save Contact
+            </button>
+            <a href="tel:4044878640" class="cta-button" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">📞</span> Call Us Now
+            </a>
+            <a href="mailto:Housing@newmission-rebuild.com" class="cta-button" style="background: rgba(26, 47, 77, 0.9); color: #d4af37; border: 2px solid #d4af37;">
+                <span style="font-size: 1.5rem;">✉️</span> Send Email
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('downloadVCF').addEventListener('click', function() {
+            const vcfContent = `BEGIN:VCARD
+VERSION:3.0
+N:;Front Office;;;
+FN:Mission Rebuild - Housing
+ORG:Mission Rebuild;Housing
+TITLE:Staff
+ADR;TYPE=WORK:;;7910 Mall Ring Rd, Suite 100;Stonecrest;GA;30038;United States
+TEL;TYPE=WORK;TYPE=VOICE:(404) 487-8640
+URL;TYPE=WORK:http://www.newmission-rebuild.com
+EMAIL;TYPE=WORK;TYPE=INTERNET:Housing@newmission-rebuild.com
+END:VCARD`;
+            
+            const blob = new Blob([vcfContent], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Mission-Rebuild-Housing.vcf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
